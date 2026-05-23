@@ -1,3 +1,4 @@
+
 # Student Interest Matcher
 
 A premium-style React + Tailwind web app where students register once, then manage profile/interests and discover matching students.
@@ -36,7 +37,7 @@ A premium-style React + Tailwind web app where students register once, then mana
 
 ## Supabase Database Setup
 
-1. Open Supabase project.
+1. Open your Supabase project.
 2. Go to SQL Editor.
 3. Run SQL in [supabase/schema.sql](supabase/schema.sql).
 4. Run SQL in [supabase/rls.sql](supabase/rls.sql).
@@ -64,6 +65,8 @@ Then restart the dev server after changing `.env` values.
 
 Do not hardcode keys in source files.
 
+Important: `src/supabaseClient.js` contains fallback Supabase values for convenience during local development. Replace or remove these defaults before publishing to avoid leaking project identifiers.
+
 ## Install and Run
 
 ```bash
@@ -73,12 +76,50 @@ npm run dev
 
 Open the local URL printed in terminal (usually `http://localhost:5173`).
 
+## Scripts
+
+- **dev**: starts the Vite development server (`npm run dev`).
+- **build**: builds a production bundle using Vite (`npm run build`).
+- **preview**: locally serves the production build (`npm run preview`).
+- **lint**: runs ESLint across the repository (`npm run lint`).
+
 ## Build for Production
 
 ```bash
 npm run build
 npm run preview
 ```
+
+## Development Notes
+
+- Node: use a modern Node.js runtime (recommended >= 18). If you use `nvm`, set node to a recent LTS.
+- Environment: add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` to a `.env` file in project root and restart the dev server.
+- Supabase client: `src/supabaseClient.js` contains fallback `supabaseUrl` and `supabaseAnonKey` values for convenience. Remove or replace these defaults and keep secrets out of source control.
+- Session storage: the app stores the current profile id using the key `sim_user_id` (see `src/supabaseClient.js`). Clearing localStorage or calling the app's logout will remove it.
+- SQL: apply both [supabase/schema.sql](supabase/schema.sql) and [supabase/rls.sql](supabase/rls.sql) in your Supabase project's SQL editor to create tables, RPCs, and RLS policies.
+
+## Linting & Formatting
+
+- ESLint is configured; run `npm run lint` to check code quality. Fix issues or integrate an editor plugin for autofix.
+- Tailwind CSS is configured via `tailwind.config.js` and `postcss.config.js`.
+
+## Where to Look in Source
+
+- App entry: [src/main.jsx](src/main.jsx#L1)
+- Top-level app component: [src/App.js](src/App.js#L1)
+- Auth and profile flows: [src/AuthPage.jsx](src/AuthPage.jsx#L1), [src/ProfilePage.jsx](src/ProfilePage.jsx#L1)
+- Supabase client and API: [src/supabaseClient.js](src/supabaseClient.js#L1)
+- SQL schema and RLS: [supabase/schema.sql](supabase/schema.sql#L1), [supabase/rls.sql](supabase/rls.sql#L1)
+
+## Troubleshooting
+
+- If the UI shows "Supabase is not configured", confirm your `.env` values and restart the dev server.
+- If auth or data fails, verify that `users`, `interests`, and `user_interests` tables exist and RLS policies are applied.
+
+## Contributing
+
+- Open an issue or PR with a clear description and reproduction steps.
+- Run `npm run lint` before opening a PR; include screenshots where relevant.
 
 ## How Matching Works
 
