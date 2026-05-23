@@ -29,10 +29,10 @@ function AppView() {
           />
           <Route path="*" element={<Navigate to="/auth" replace />} />
         </Routes>
-      </div>
-      <p className="text-center text-sm text-gray-500">
+        <p className="text-center text-sm text-gray-500">
        Made with ❤️ by student developers
       </p>
+      </div>
     </div>
   )
 }
