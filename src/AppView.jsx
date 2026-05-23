@@ -31,7 +31,7 @@ function AppView() {
         </Routes>
       </div>
       <p className="text-center text-sm text-gray-500">
-        Built by student developers with LOVE
+       Made with ❤️ by student developers
       </p>
     </div>
   )
